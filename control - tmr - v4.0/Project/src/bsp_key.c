@@ -38,7 +38,12 @@ void EXTI9_5_IRQHandler(void)
 		delay_ms(10);//消抖
 		if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8)==0)	 //按键KEY0
 		{
-			flag = !flag;
+			flag ^= 1;
+//	while(1)
+//	{
+//			if(flag)
+//				break;
+//	}
 		}		
 	} 
 	EXTI_ClearITPendingBit(EXTI_Line8);  //清除LINE4上的中断标志位  

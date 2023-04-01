@@ -11,12 +11,13 @@ int main(void)
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); 
 	Motor_Init();
 	KEY_Init();
+	GPIO_SetBits(GPIOB,GPIO_Pin_6);
 	while(1)
 	{
-		if(flag)
-		GPIO_SetBits(GPIOA,GPIO_Pin_5);
-		else 
-		GPIO_ResetBits(GPIOA,GPIO_Pin_5);
+		if(!flag)
+		MOTOR2_STOP
+		else
+			MOTOR2_RUN
 	}
 	
 }
