@@ -2,7 +2,7 @@
 #include "stm32f10x.h"                  // Device header
 #include "delay.h"
 
-u8 flag = 0;
+u8 flag = 1;
 void KEY_Init(void)
 { 
 	EXTI_InitTypeDef EXTI_InitStructure;
@@ -39,11 +39,11 @@ void EXTI9_5_IRQHandler(void)
 		if(GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_8)==0)	 //按键KEY0
 		{
 			flag ^= 1;
-//	while(1)
-//	{
-//			if(flag)
-//				break;
-//	}
+//			TIM_Cmd(TIM2, flag);  //使能TIM3	
+//			TIM_Cmd(TIM3, flag);  //使能TIM3
+//			TIM_Cmd(TIM4, flag);  //使能TIM3
+//			RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 |RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM4, flag);
+//			RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO |RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOA,flag);
 		}		
 	} 
 	EXTI_ClearITPendingBit(EXTI_Line8);  //清除LINE4上的中断标志位  

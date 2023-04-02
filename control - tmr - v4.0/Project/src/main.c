@@ -14,10 +14,7 @@ int main(void)
 	GPIO_SetBits(GPIOB,GPIO_Pin_6);
 	while(1)
 	{
-		if(!flag)
-		MOTOR2_STOP
-		else
-			MOTOR2_RUN
+		status2();
 	}
 	
 }

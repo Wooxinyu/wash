@@ -37,7 +37,8 @@
 														delay_ms(500);	\
 													}
 
-#define MOTOR2_RUN_ONE		{	MOTOR2_RUN			\
+#define MOTOR2_RUN_ONE		{	while(flag); 		\
+														MOTOR2_RUN			\
 														delay_ms(1000);	\
 														MOTOR2_STOP			\
 														delay_ms(500); 	\
@@ -48,7 +49,8 @@
 														delaay_ms(50);	\
 													}
 
-#define MOTOR3_RUN_ON			{	MOTOR3_DIR_ON  		 \
+#define MOTOR3_RUN_ON			{	while(flag); 			\
+														MOTOR3_DIR_ON  		 \
 														MOTOR3_RUN    		 \
 														delay_ms(1000);  	 \
 														MOTOR3_STOP    		 \
@@ -68,28 +70,32 @@
 														delay_ms(500);	\
 														}
 
-#define MOTOR_WASH_DOWN			{MOTOR_WASH_DIR_DOWN	\
+#define MOTOR_WASH_DOWN			{	while(flag); 		\
+															MOTOR_WASH_DIR_DOWN	\
 															MOTOR_WASH_RUN			\
 															delay_ms(1000);			\
 															MOTOR_WASH_STOP			\
 															delay_ms(500);			\
 														}
 
-#define MOTOR_WASH_UP			{	MOTOR_WASH_DIR_UP	\
+#define MOTOR_WASH_UP			{	while(flag); 		\
+														MOTOR_WASH_DIR_UP	\
 														MOTOR_WASH_RUN		\
 														delay_ms(1000);		\
 														MOTOR_WASH_STOP		\
 														delay_ms(500);		\
 													}
 
-#define MOTOR_SOAK_UP			{	MOTOR_SOAK_DIR_UP	\
+#define MOTOR_SOAK_UP			{		while(flag); 		\
+															MOTOR_SOAK_DIR_UP	\
 															MOTOR_SOAK_RUN	\
 															delay_ms(1000);	\
 															MOTOR_SOAK_STOP	\
 															delay_ms(500);	\
 													}
 
-#define MOTOR_SOAK_DOWN			{	MOTOR_SOAK_DIR_DOWN	\
+#define MOTOR_SOAK_DOWN			{	while(flag); 		\
+															MOTOR_SOAK_DIR_DOWN	\
 															MOTOR_SOAK_RUN			\
 															delay_ms(1000);			\
 															MOTOR_SOAK_STOP			\
