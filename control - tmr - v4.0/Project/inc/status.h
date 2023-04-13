@@ -9,98 +9,31 @@
 #define MOTOR2_RUN    digitalLo(MOTOR2_PORT,MOTOR2_ENA_PIN)
 #define MOTOR2_STOP   digitalHi(MOTOR2_PORT,MOTOR2_ENA_PIN)
 
-#define MOTOR3_RUN    digitalLo(MOTOR3_PORT,MOTOR3_ENA_PIN)
-#define MOTOR3_STOP		digitalHi(MOTOR3_PORT,MOTOR3_ENA_PIN)
-#define MOTOR3_DIR_ON	digitalHi(MOTOR3_PORT,MOTOR3_DIR_PIN)
-#define MOTOR3_DIR_BACK	digitalLo(MOTOR3_PORT,MOTOR3_DIR_PIN)
-
 #define MOTOR_WASH_RUN	digitalLo(MOTOR_WASH_PORT,MOTOR_WASH_ENA)
 #define MOTOR_WASH_STOP	digitalHi(MOTOR_WASH_PORT,MOTOR_WASH_ENA)
 #define MOTOR_WASH_DIR_UP	digitalHi(MOTOR_WASH_PORT,MOTOR_WASH_DIR)
 #define MOTOR_WASH_DIR_DOWN	digitalLo(MOTOR_WASH_PORT,MOTOR_WASH_DIR)
 
-#define MOTOR_SOAK_RUN	digitalLo(MOTOR_SOAK_PORT,MOTOR_SOAK_ENA)
-#define MOTOR_SOAK_STOP	digitalHi(MOTOR_SOAK_PORT,MOTOR_SOAK_ENA)
-#define MOTOR_SOAK_DIR_UP	digitalHi(MOTOR_SOAK_PORT,MOTOR_SOAK_DIR)
-#define MOTOR_SOAK_DIR_DOWN	digitalLo(MOTOR_SOAK_PORT,MOTOR_SOAK_DIR)
 
 #define MOTOR_SWAP_STOP {	digitalHi(MOTOR_SWAP_PORT,MOTOR_SWAP_ENA)	\
 													TIM_Cmd(TIM2, DISABLE);										\
 												}
 
 #define MOTOR_SWAP_RUN 		{	digitalLo(MOTOR_SWAP_PORT,MOTOR_SWAP_ENA)	\
-														TIM_Cmd(TIM2, ENABLE);										\
-													}
-#define MOTOR1_RUN_ONE		{	MOTOR1_RUN			\
-														delay_ms(1000);	\
-														MOTOR1_STOP			\
-														delay_ms(500);	\
+														TIM_Cmd(TIM3, ENABLE);										\
 													}
 
-#define MOTOR2_RUN_ONE		{	while(flag); 		\
-														MOTOR2_RUN			\
-														delay_ms(1000);	\
-														MOTOR2_STOP			\
-														delay_ms(500); 	\
-													}
-#define MOTOR2_RUN_HALF		{	MOTOR2_RUN			\
-														delay_ms(500);	\
-														MOTOR2_STOP			\
-														delaay_ms(50);	\
-													}
+													
+#define  WASH_ON				{	digitalHi(WASH_RELAY_PORT, WASH_RELAY_PIN) }
 
-#define MOTOR3_RUN_ON			{	while(flag); 			\
-														MOTOR3_DIR_ON  		 \
-														MOTOR3_RUN    		 \
-														delay_ms(1000);  	 \
-														MOTOR3_STOP    		 \
-														delay_ms(1000); 	 \
-													}
+#define	 WASH_OFF				{ digitalLo(WASH_RELAY_PORT, WASH_RELAY_PIN)	}
 
-#define MOTOR3_RUN_BACK		{	MOTOR3_DIR_BACK  		 \
-														MOTOR3_RUN    		 \
-														delay_ms(1000);  	 \
-														MOTOR3_STOP    		 \
-														delay_ms(500); 	 \
-													}
-#define		MOTOR_RUN_BACK	{	MOTOR3_DIR_BACK	\
-														MOTOR3_RUN			\
-														delay_ms(1000);	\
-														MOTOR3_STOP			\
-														delay_ms(500);	\
-														}
+#define OVEN_ON					{	digitalHi(OVEN_RELAY_PORT, OVEN_RELAY_PIN) \
+												}
 
-#define MOTOR_WASH_DOWN			{	while(flag); 		\
-															MOTOR_WASH_DIR_DOWN	\
-															MOTOR_WASH_RUN			\
-															delay_ms(1000);			\
-															MOTOR_WASH_STOP			\
-															delay_ms(500);			\
-														}
+#define OVEN_OFF				{	digitalLo(OVEN_RELAY_PORT, OVEN_RELAY_PIN)	\
+												}
 
-#define MOTOR_WASH_UP			{	while(flag); 		\
-														MOTOR_WASH_DIR_UP	\
-														MOTOR_WASH_RUN		\
-														delay_ms(1000);		\
-														MOTOR_WASH_STOP		\
-														delay_ms(500);		\
-													}
-
-#define MOTOR_SOAK_UP			{		while(flag); 		\
-															MOTOR_SOAK_DIR_UP	\
-															MOTOR_SOAK_RUN	\
-															delay_ms(1000);	\
-															MOTOR_SOAK_STOP	\
-															delay_ms(500);	\
-													}
-
-#define MOTOR_SOAK_DOWN			{	while(flag); 		\
-															MOTOR_SOAK_DIR_DOWN	\
-															MOTOR_SOAK_RUN			\
-															delay_ms(1000);			\
-															MOTOR_SOAK_STOP			\
-															delay_ms(500);			\
-														}					
 
 /********************************************/
 /****************GPIOSET*********************/

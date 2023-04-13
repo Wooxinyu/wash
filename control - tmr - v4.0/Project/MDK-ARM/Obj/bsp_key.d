@@ -1,5 +1,5 @@
 .\obj\bsp_key.o: ..\src\bsp_key.c
-.\obj\bsp_key.o: ..\src\bsp_key.h
+.\obj\bsp_key.o: ..\inc\bsp_key.h
 .\obj\bsp_key.o: ..\..\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\obj\bsp_key.o: ..\..\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
 .\obj\bsp_key.o: D:\Keil_V5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -29,4 +29,4 @@
 .\obj\bsp_key.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\obj\bsp_key.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\obj\bsp_key.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
-.\obj\bsp_key.o: ..\src\delay.h
+.\obj\bsp_key.o: ..\inc\delay.h

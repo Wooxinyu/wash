@@ -1,6 +1,6 @@
 .\obj\status.o: ..\src\status.c
 .\obj\status.o: ..\inc\status.h
-.\obj\status.o: ..\src\delay.h
+.\obj\status.o: ..\inc\delay.h
 .\obj\status.o: ..\..\Libraries\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\obj\status.o: ..\..\Libraries\CMSIS\CM3\CoreSupport\core_cm3.h
 .\obj\status.o: D:\Keil_V5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -30,4 +30,4 @@
 .\obj\status.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\obj\status.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\obj\status.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
-.\obj\status.o: ..\src\bsp_motor_init.h
+.\obj\status.o: ..\inc\bsp_motor_init.h
