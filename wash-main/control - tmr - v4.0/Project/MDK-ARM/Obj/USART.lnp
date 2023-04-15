@@ -4,6 +4,7 @@
 ".\obj\bsp_motor_init.o"
 ".\obj\bsp_key.o"
 ".\obj\status.o"
+".\obj\motor_control.o"
 ".\obj\misc.o"
 ".\obj\stm32f10x_dbgmcu.o"
 ".\obj\stm32f10x_exti.o"

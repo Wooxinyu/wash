@@ -28,7 +28,7 @@
 .\obj\main.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h
 .\obj\main.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h
 .\obj\main.o: ..\..\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
-.\obj\main.o: ..\src\delay.h
-.\obj\main.o: ..\src\bsp_key.h
-.\obj\main.o: ..\src\bsp_motor_init.h
+.\obj\main.o: ..\inc\delay.h
+.\obj\main.o: ..\inc\bsp_key.h
+.\obj\main.o: ..\inc\bsp_motor_init.h
 .\obj\main.o: ..\inc\status.h

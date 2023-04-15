@@ -1,11 +1,10 @@
 #include "bsp_motor_init.h"
-#include "status.h"
-
+#include "motor_control.h"
 
 static uint32_t i = 0;
 static uint16_t j = 0;
 static int index = 0;
-uint32_t step[] = {10,10,6,10,10,4}; 
+uint32_t step[] = {8,6,10,20,10,8,10,20,10}; 
 static void BSP_Motor_Init(GPIO_TypeDef* Motor_port,uint16_t	Dir_Pin,uint16_t	Pul_Pin,uint16_t	Ena_Pin,uint32_t Port_Rcc)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -46,41 +45,7 @@ void TIM3_IRQHandler(void)   //TIM3ÖÐ¶Ï
 		if(j == step[index])
 		{
 			j = 0;
-			switch (index)
-			{
-				case 0:
-					TIM_CCxCmd(TIM3,TIM_Channel_1 ,DISABLE);
-					TIM_CCxCmd(TIM3,TIM_Channel_4 ,ENABLE);
-					MOTOR1_STOP
-					MOTOR_SWAP_RUN
-					break;
-				case 1:
-					MOTOR_SWAP_STOP
-					TIM_CCxCmd(TIM3,TIM_Channel_4 ,DISABLE);
-					MOTOR_WASH_DIR_DOWN
-					MOTOR_WASH_RUN
-					TIM_CCxCmd(TIM3,TIM_Channel_3 ,ENABLE);
-					break;
-				case 2:
-					TIM_CCxCmd(TIM3,TIM_Channel_3 ,DISABLE);
-					WASH_ON
-					MOTOR_WASH_STOP
-					break;
-				case 3:
-					WASH_OFF
-					MOTOR_WASH_DIR_UP
-					TIM_CCxCmd(TIM3,TIM_Channel_3 ,ENABLE);
-					MOTOR_WASH_RUN
-					break;
-				case 4:
-					MOTOR_WASH_STOP
-					TIM_CCxCmd(TIM3,TIM_Channel_3 ,DISABLE);
-					MOTOR1_RUN
-					TIM_CCxCmd(TIM3,TIM_Channel_1 ,ENABLE);
-					break;
-				default :
-					TIM_Cmd(TIM3, DISABLE);  //Ê¹ÄÜTIM3
-			}
+			TIM2_Control_Decision(index);
 			index ++;
 		}
 	}

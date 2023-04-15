@@ -29,7 +29,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x.h"
-
+#include "srcIncluder.h"   
+#include "bsp_key.h"
+#include "SysTick.h"
+#include "UART.h"
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -44,7 +47,9 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-
+void USART1_IRQHandler(void);
+void EXTI9_5_IRQHandler(void);
+void USART3_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif
