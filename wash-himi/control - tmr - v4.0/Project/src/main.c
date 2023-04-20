@@ -18,12 +18,13 @@ int main(void)
 	KEY_Init();
 	uart_init(115200);
 	delay_ms(1500);
-	printf("\0x00\0xff\0xff\0xff\r\n");
+//	printf("\0x00\0xff\0xff\0xff\r\n");
+	printf("初始化完成\r\n");
 	u16 t;  
 	u16 len;
 	while(1)
 	{
-		if(USART_RX_BUF[0]== 0X55)
+		if(USART_RX_STA&0x8000)
 		{
 			if(USART_RX_BUF[1] == 0x05)
 			{
@@ -36,10 +37,7 @@ int main(void)
 //				MOTOR_WASH_STOP
 //				MOTOR_SWAP_STOP
 				TIM_Cmd(TIM3,DISABLE);
-			}
-		USART_RX_BUF[1] = 0X00;		
-		if(USART_RX_STA&0x8000)
-		{					   
+			}							   
 			len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
 //			printf("\r\n您发送的消息为:\r\n\r\n");
 			for(t=0;t<len;t++)
@@ -48,14 +46,8 @@ int main(void)
 				while(USART_GetFlagStatus(USART1,USART_FLAG_TC)!=SET);//等待发送结束
 			}
 			USART_RX_STA=0;
+			USART_RX_BUF[1] = 0X00;	
 		}
-	}
-	else
-	{
-				clearBuff();
-	}
-
-		
 	}
 }
 	

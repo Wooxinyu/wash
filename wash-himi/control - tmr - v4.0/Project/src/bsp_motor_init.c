@@ -90,7 +90,7 @@ static void Timer_Init(uint32_t arr1)
 	TIM_CCxCmd(TIM3,TIM_Channel_2 ,DISABLE);
 	TIM_CCxCmd(TIM3,TIM_Channel_3 ,DISABLE);
 	TIM_CCxCmd(TIM3,TIM_Channel_4 ,DISABLE);
-	TIM_Cmd(TIM3, ENABLE);  //使能TIM3
+//	TIM_Cmd(TIM3, ENABLE);  //使能TIM3
 
 }
 
