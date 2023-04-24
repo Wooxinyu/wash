@@ -9,7 +9,7 @@ typedef struct device_buf
 	uint16_t cmd;
 	uint16_t head;
 	uint16_t tail;
-	uint16_t revbuf[2048];
+	uint16_t revbuf[4096];
 }device;
 
 device device1;
@@ -80,7 +80,7 @@ void USART2_IRQHandler(void)                	//串口1中断服务程序
 		Res =USART_ReceiveData(USART2);	//读取接收到的数据
 		if(state == 0)
 		{
-				if(Res == 0xff)
+				if(Res == 0xaa)
 				{
 					state = 1;
 				}
@@ -110,7 +110,7 @@ void USART2_IRQHandler(void)                	//串口1中断服务程序
 					}else if(i == 2)
 					{
 						device1.revbuf[device1.tail] = tmp<<8 | Res;
-						device1.tail++;
+						device1.tail = (device1.tail+1)%4096;
 						state = 0;
 						i = 0;
 					}
@@ -127,7 +127,7 @@ void USART2_IRQHandler(void)                	//串口1中断服务程序
 					}else if(i == 2)
 					{
 						device2.revbuf[device2.tail] = tmp<<8 | Res;
-						device2.tail++;
+						device2.tail = (device2.tail+1)%4096;
 						state = 0;
 						i = 0;
 					}
@@ -144,7 +144,7 @@ void USART2_IRQHandler(void)                	//串口1中断服务程序
 					}else if(i == 2)
 					{
 						device3.revbuf[device3.tail] = tmp<<8 | Res;
-						device3.tail++;
+						device3.tail = (device3.tail+1)%4096;
 						state = 0;
 						i = 0;
 					}
