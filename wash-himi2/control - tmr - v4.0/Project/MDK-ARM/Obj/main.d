@@ -34,3 +34,4 @@
 .\obj\main.o: ..\inc\motor_control.h
 .\obj\main.o: ..\inc\usart.h
 .\obj\main.o: D:\Keil_V5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\main.o: ..\inc\usart_scan.h

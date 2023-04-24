@@ -10,7 +10,9 @@
 #define MOTOR2_RUN    digitalLo(MOTOR2_PORT,MOTOR2_ENA_PIN)
 #define MOTOR2_STOP   digitalHi(MOTOR2_PORT,MOTOR2_ENA_PIN)
 
-
+/************************************************/
+/****************MOTOR_WASH*********************/
+/**********************************************/
 #define MOTOR_WASH_RUN	{digitalLo(MOTOR_WASH_PORT,MOTOR_WASH_ENA)	\
 												TIM_CCxCmd(TIM3,TIM_Channel_3 ,ENABLE);	}
 #define MOTOR_WASH_STOP	{digitalHi(MOTOR_WASH_PORT,MOTOR_WASH_ENA)	\
@@ -18,13 +20,23 @@
 #define MOTOR_WASH_DIR_UP	digitalHi(MOTOR_WASH_PORT,MOTOR_WASH_DIR)
 #define MOTOR_WASH_DIR_DOWN	digitalLo(MOTOR_WASH_PORT,MOTOR_WASH_DIR)
 
-
+/***********************************************/
+/****************MOTOR_SWAP*********************/
+/***********************************************/
 
 #define MOTOR_SWAP_STOP {	digitalHi(MOTOR_SWAP_PORT,MOTOR_SWAP_ENA)		\
 													TIM_CCxCmd(TIM3,TIM_Channel_4 ,DISABLE);}
-
 #define MOTOR_SWAP_RUN 		{	digitalLo(MOTOR_SWAP_PORT,MOTOR_SWAP_ENA)	\
 														TIM_CCxCmd(TIM3,TIM_Channel_4 ,ENABLE);}
+
+/***********************************************/
+/****************MOTOR_SCAN*********************/
+/**********************************************/
+#define MOTOR_SCAN_RUN		{digitalLo(MOTOR_SCAN_PORT,MOTOR_SCAN_ENA)\
+														TIM_CCxCmd(TIM4,TIM_Channel_1,ENABLE);}
+#define MOTOR_SCAN_STOP		{digitalHi(MOTOR_SCAN_PORT,MOTOR_SCAN_ENA)\
+														TIM_CCxCmd(TIM4,TIM_Channel_1,DISABLE);}
+#define MOTOR_SCAN_TOG		{digitalToggle(MOTOR_SCAN_PORT,MOTOR_SCAN_DIR);}
 
 
 #define  WASH_ON				{	digitalHi(WASH_RELAY_PORT, WASH_RELAY_PIN) }

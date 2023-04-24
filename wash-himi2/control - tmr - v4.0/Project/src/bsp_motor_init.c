@@ -1,9 +1,6 @@
 #include "bsp_motor_init.h"
 #include "motor_control.h"
 
-static uint32_t i = 0;
-static uint16_t j = 0;
-static int index = 0;
 uint32_t step[] = {8,10,20,10,12,16,10,20,10,6,8,10,20,10,10}; 
 static void BSP_Motor_Init(GPIO_TypeDef* Motor_port,uint16_t	Dir_Pin,uint16_t	Pul_Pin,uint16_t	Ena_Pin,uint32_t Port_Rcc)
 {
@@ -33,6 +30,9 @@ static void BSP_Switch_Init(GPIO_TypeDef * Motor_port, uint16_t Switch_Pin, uint
 
 void TIM3_IRQHandler(void)   //TIM3中断
 {
+	static uint32_t i = 0;
+	static uint16_t j = 0;
+	static int index = 0;
 	if(TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) //检查指定的TIM中断发生与否:TIM 中断源 
 	{
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);  //清除TIMx的中断待处理位:TIM 中断源 
@@ -52,7 +52,25 @@ void TIM3_IRQHandler(void)   //TIM3中断
 	}
 }
 
-static void Timer_Init(uint32_t arr1)
+void TIM4_IRQHandler(void)
+{
+	static uint32_t i;
+	if(TIM_GetITStatus(TIM4, TIM_IT_Update) != RESET)
+	{
+		TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+		i++;
+		if(i == 6580)
+		{
+			MOTOR_SCAN_STOP
+			MOTOR_SCAN_TOG
+		}
+		
+	
+	}
+
+}
+
+static void Timer3_Init(uint32_t arr1)
 {
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure;
@@ -67,10 +85,10 @@ static void Timer_Init(uint32_t arr1)
 	
 	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;  //TIM3中断
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  //先占优先级0级
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;  //从优先级3级
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;  //从优先级3级
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道被使能
 	NVIC_Init(&NVIC_InitStructure);  //根据NVIC_InitStruct中指定的参数初始化外设NVIC寄存器
-	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE ); //使能指定的TIM3中断,允许更新中断
+	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE); //使能指定的TIM3中断,允许更新中断
 	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //选择定时器模式:TIM脉冲宽度调制模式2
  	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
 	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性:TIM输出比较极性高
@@ -94,6 +112,34 @@ static void Timer_Init(uint32_t arr1)
 
 }
 
+static void Timer4_Init(uint32_t arr)
+{
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+	TIM_OCInitTypeDef  TIM_OCInitStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4,ENABLE);
+
+	TIM_TimeBaseStructure.TIM_Period = arr;
+	TIM_TimeBaseStructure.TIM_CounterMode = 7;
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_Prescaler = TIM_OutputState_Enable;
+	TIM_TimeBaseInit(TIM4,&TIM_TimeBaseStructure);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;  //TIM3中断
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;  //先占优先级0级
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;  //从优先级3级
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //IRQ通道被使能
+	NVIC_Init(&NVIC_InitStructure);  //根据NVIC_InitStruct中指定的参数初始化外设NVIC寄存器
+	TIM_ITConfig(TIM4,TIM_IT_Update,ENABLE); //使能指定的TIM3中断,允许更新中断
+	
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //选择定时器模式:TIM脉冲宽度调制模式2
+ 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //比较输出使能
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出极性:TIM输出比较极性高
+	TIM_OC1Init(TIM4, &TIM_OCInitStructure);  //根据T指定的参数初始化外设TIM3 OC2
+	
+	TIM_SetCompare1(TIM4,1000);
+//	TIM_Cmd(TIM4,ENABLE);
+}
 
 void Motor_Init(void)
 {
@@ -101,10 +147,12 @@ void Motor_Init(void)
 	BSP_Motor_Init(MOTOR2_PORT,0,MOTOR2_PUL_PIN,MOTOR2_ENA_PIN,MOTOR2_PORT_RCC);
 	BSP_Motor_Init(MOTOR_WASH_PORT,MOTOR_WASH_DIR,MOTOR_WASH_PUL,MOTOR_WASH_ENA,MOTOR_WASH_RCC);
 	BSP_Motor_Init(MOTOR_SWAP_PORT,0,MOTOR_SWAP_PUL,MOTOR_SWAP_ENA,MOTOR_SWAP_RCC);
+	BSP_Motor_Init(MOTOR_SCAN_PORT,MOTOR_SCAN_DIR,MOTOR_SCAN_PUL,MOTOR_SCAN_ENA,MOTOR_SCAN_RCC);
 	BSP_Switch_Init(WASH_RELAY_PORT, WASH_RELAY_PIN, WASH_RELAY_RCC);
 	BSP_Switch_Init(OVEN_RELAY_PORT, OVEN_RELAY_PIN, OVEN_RELAY_RCC);
 	
-	Timer_Init(2810);
+	Timer3_Init(2810);
+	Timer4_Init(5625);
 }
 
 

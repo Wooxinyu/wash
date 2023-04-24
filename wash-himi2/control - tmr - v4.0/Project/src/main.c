@@ -5,7 +5,7 @@
 #include "motor_control.h"
 #include "usart.h"
 #include "stdio.h"
-
+#include "usart_scan.h"
 #define FRAMELENGTH 6
 
 
@@ -17,6 +17,7 @@ int main(void)
 	Motor_Init();
 	KEY_Init();
 	uart_init(115200);
+	Usart2_Init(115200);
 	delay_ms(1500);
 	printf("初始化成功\r\n");
 	u16 t;  

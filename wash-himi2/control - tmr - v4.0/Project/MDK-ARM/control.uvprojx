@@ -418,6 +418,11 @@
               <FileType>1</FileType>
               <FilePath>..\src\usart.c</FilePath>
             </File>
+            <File>
+              <FileName>usart_scan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\usart_scan.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -497,11 +502,6 @@
               <FileName>stm32f10x_rtc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f10x_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c</FilePath>
             </File>
           </Files>
         </Group>
